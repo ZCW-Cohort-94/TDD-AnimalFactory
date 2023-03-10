@@ -1,5 +1,6 @@
 package rocks.zipcodewilmington;
 
+import org.junit.Assert;
 import org.junit.Test;
 import rocks.zipcodewilmington.animals.Dog;
 import rocks.zipcodewilmington.animals.animal_creation.AnimalFactory;
@@ -31,4 +32,88 @@ public class DogHouseTest {
         // Then
         DogHouse.getNumberOfDogs();
     }
+
+    @Test
+    public void testAddDog() {
+
+        //Given
+        DogHouse.clear();
+        String name = "Dog";
+        Date birthdate = new Date(2020 - 1900, 10, 31);
+        Dog dog = AnimalFactory.createDog(name, birthdate);
+
+        //When
+        DogHouse.add(dog);
+
+        //Then
+        Assert.assertEquals(1, (int)DogHouse.getNumberOfDogs());
+
+    }
+
+    @Test
+    public void testRemoveDogId(){
+        //Given
+        DogHouse.clear();
+        String name = "Dog";
+        Date birthdate = new Date(2020 - 1900, 10, 31);
+        Dog dog = AnimalFactory.createDog(name, birthdate);
+
+        //When
+        DogHouse.remove(dog);
+
+        //Then
+        Assert.assertEquals(0, (int)dog.getId());
+
+    }
+
+    @Test
+    public void testRemoveDog(){
+        //Given
+        DogHouse.clear();
+        String name = "Dog";
+        Date birthdate = new Date(2020 - 1900, 10, 31);
+        Dog dog = AnimalFactory.createDog(name, birthdate);
+
+        //When
+        DogHouse.remove(dog);
+
+        //Then
+        Assert.assertEquals(0, (int)DogHouse.getNumberOfDogs());
+
+    }
+
+    @Test
+    public void testGetDogById(){
+        //Given
+        DogHouse.clear();
+        String name = "Dog";
+        Date birthdate = new Date(2020 - 1900, 10, 31);
+        Dog dog = AnimalFactory.createDog(name, birthdate);
+        DogHouse.add(dog);
+
+        //When
+        int thisid = dog.getId();
+
+        //Then
+        Assert.assertEquals(dog, DogHouse.getDogById(thisid));
+
+    }
+
+    @Test
+    public void getNumDogs(){
+        //Given
+        DogHouse.clear();
+        String name = "Dog";
+        Date birthdate = new Date(2020 - 1900, 10, 31);
+        Dog dog = AnimalFactory.createDog(name, birthdate);
+
+        //When
+        DogHouse.add(dog);
+
+        //Then
+        Assert.assertEquals(1, (int)DogHouse.getNumberOfDogs());
+
+
+    }
 }
+
