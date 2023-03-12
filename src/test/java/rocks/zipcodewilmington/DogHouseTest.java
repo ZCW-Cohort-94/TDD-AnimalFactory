@@ -1,8 +1,11 @@
 package rocks.zipcodewilmington;
 
+import org.junit.Assert;
 import org.junit.Test;
+import rocks.zipcodewilmington.animals.Cat;
 import rocks.zipcodewilmington.animals.Dog;
 import rocks.zipcodewilmington.animals.animal_creation.AnimalFactory;
+import rocks.zipcodewilmington.animals.animal_storage.CatHouse;
 import rocks.zipcodewilmington.animals.animal_storage.DogHouse;
 
 import java.util.Date;
@@ -30,5 +33,56 @@ public class DogHouseTest {
 
         // Then
         DogHouse.getNumberOfDogs();
+    }
+
+    @Test
+    public void testAdd() {
+        String name = "Milo";
+        Date birthDate = new Date();
+        Dog animal = AnimalFactory.createDog(name, birthDate);
+        DogHouse.clear();
+        DogHouse.add(animal);
+        Assert.assertEquals(new Integer(1), DogHouse.getNumberOfDogs());
+    }
+
+    @Test
+    public void testRemove() {
+        String name = "Milo";
+        Date birthDate = new Date();
+        Dog dog = new Dog(name, birthDate, 123);
+        DogHouse.clear();
+        DogHouse.add(dog);
+        DogHouse.remove(dog);
+        Assert.assertEquals(new Integer(0), DogHouse.getNumberOfDogs());
+    }
+
+    @Test
+    public void testRemoveById() {
+        String name = "Milo";
+        Date birthDate = new Date();
+        Dog dog = new Dog(name, birthDate, 123);
+        DogHouse.add(dog);
+        DogHouse.remove(123);
+        Assert.assertEquals(new Integer(0), DogHouse.getNumberOfDogs());
+    }
+
+    @Test
+    public void testGetDogById() {
+        String name = "Milo";
+        Date date = new Date();
+        int id = 123;
+        Dog dog = new Dog(name, date, id);
+        DogHouse.add(dog);
+        Assert.assertEquals(dog, DogHouse.getDogById(123));
+    }
+
+    @Test
+    public void testgetNumberOfDogs() {
+        String name = "Milo";
+        Date date = new Date();
+        int id = 123;
+        Dog dog = new Dog(name, date, id);
+        DogHouse.add(dog);
+        Assert.assertEquals(new Integer(1), DogHouse.getNumberOfDogs());
     }
 }
